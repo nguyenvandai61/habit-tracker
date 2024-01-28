@@ -1,0 +1,10 @@
+{
+    "manifest_version": 2,
+    "name": "Habit tracker",
+    "version": "1.0",
+    "description": "A simple habit tracker",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "dist/popup.html"
+    }
+}
