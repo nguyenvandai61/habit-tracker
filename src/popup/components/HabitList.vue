@@ -1,9 +1,9 @@
 <template>
-     <div class="habit-list">
-    <h1>Habit Tracker</h1>
-    <ul>
+  <div class="habit-list max-w-4xl mx-auto p-4">
+    <h1 class="text-2xl font-bold text-center mb-6">Habit Tracker</h1>
+    <ul class="list-none space-y-4">
       <li v-for="habit in habits" :key="habit.id">
-        <HabitItem :habit="habit" @update:habit="updateHabit" @remove-habit="emitRemoveHabit" />
+        <HabitItem :habit="habit" @update:habit="updateHabit" @remove-habit="emitRemoveHabit" class="p-4" />
       </li>
     </ul>
   </div>

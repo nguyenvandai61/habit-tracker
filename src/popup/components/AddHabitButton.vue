@@ -1,5 +1,5 @@
 <template>
-    <button @click="addHabit">Add Habit</button>
+  <button @click="addHabit">Add Habit</button>
 </template>
 
 <script setup>
