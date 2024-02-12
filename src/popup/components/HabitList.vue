@@ -10,25 +10,13 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { computed } from 'vue';
 
 import HabitItem from './HabitItem.vue';
+import { useHabitsStore } from '@/stores/habitsStore';
 
-const props = defineProps({
-  habits: {
-    type: Array,
-    required: true
-  }
-});
-
-const emit = defineEmits(['remove-habit']);
-
-// Using a ref to make the habits reactive
-const habits = ref(props.habits);
-
-watchEffect(() => {
-  habits.value = props.habits;
-});
+const habitsStore = useHabitsStore();
+const habits = computed(() => habitsStore.habits);
 
 function updateHabit(updatedHabit) {
   habits.value = habits.value.map(habit =>
@@ -37,6 +25,6 @@ function updateHabit(updatedHabit) {
 }
 
 function emitRemoveHabit(id) {
-  emit('remove-habit', id);
+  habitsStore.removeHabit(id);
 }
 </script>

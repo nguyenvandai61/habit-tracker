@@ -3,11 +3,11 @@
     <h3 class="text-lg font-semibold">{{ habit.title }}</h3>
     <div class="flex justify-between items-center mt-4">
       <span class="completion-count text-sm text-gray-600">
-        Completed: {{ completedCount(habit) }}/{{ habit.days.length }}
+        Completed: {{ completedCount(habit) }}/{{ 3 }}
       </span>
       <div class="flex items-center">
         <label class="flex items-center">
-          <input type="checkbox" :checked="habit.done[currentDay]" @change="toggleDone" class="form-checkbox h-5 w-5 text-blue-600"/>
+          <input type="checkbox" :checked="isDone" @change="toggleDone" class="form-checkbox h-5 w-5 text-blue-600"/>
           <span class="ml-2 text-gray-700">Done today?</span>
         </label>
       </div>
@@ -27,13 +27,24 @@ const habitsStore = useHabitsStore()
 const props = defineProps({
   habit: {
     type: Object,
-    required: true
+    required: true,
+    default: () => ({
+      id: 0,
+      title: '',
+      days: [],
+      done: {
+        '2024-02-01': false,
+        '2024-02-02': false,
+        '2024-02-03': false
+      }
+    })
   }
 })
 
 const emit = defineEmits(['update:habit'])
 
 const currentDay = computed(() => habitsStore.currentDay)
+const isDone = computed(() => props.habit.done[currentDay.value])
 
 function toggleDone() {
     emit('update:habit', {
@@ -46,6 +57,6 @@ function toggleDone() {
 }
 
 function completedCount(habit) {
-  return Object.values(habit.done).filter((done) => done).length
+  return 0
 }
 </script>
